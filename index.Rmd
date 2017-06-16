@@ -29,6 +29,8 @@ This workshop is designed to introduce participants to two packages: ggplot2 and
 
 **Contact**: Please contact katieflorko@gmail.com for more information.
 
+**Please RSVP** [here](https://www.meetup.com/Greater-Toronto-Area-GTA-R-Users-Group/events/240618369/?a=socialmedia)
+
 ## Schedule
 
 Time   | Goal
@@ -60,5 +62,6 @@ Install R by downloading and running [this .exe](http://cran.r-project.org/bin/w
 <div style="width:300px; height=120px">
 ![](images/agsbs.logo.png)
 </div>
-
+<div style="width:300px; height=120px">
+![](images/meetup.jpg)
 
