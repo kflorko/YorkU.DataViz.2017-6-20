@@ -13,5 +13,5 @@ navbar:
 output_dir: "."
 output:
   html_document:
-    theme: yeti
+    theme: cosmo
     
