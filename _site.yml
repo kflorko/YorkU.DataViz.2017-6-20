@@ -6,9 +6,9 @@ navbar:
       href: index.html
     - text: "R.basics"
       href: r.basics.html
-    - text: "Intro to ggplot2"
+    - text: "ggplot2"
       href: DataViz.intro.html
-    - text: "Making maps using ggplot2 and ggmap"
+    - text: "Maps"
       href: DataViz.Maps.intro.html
 output_dir: "."
 output:
