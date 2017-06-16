@@ -12,11 +12,15 @@ knitr::opts_chunk$set(echo = TRUE)
 ![](images/katie.jpg)
 </div>
 
- | 
+York University | June 19, 2017 | 4 pm - 6 pm
 ----------------|-----------------------------------
-York University   | **Instructor**: Katie Florko [@kflorko](https://twitter.com/KFlorko)
-June 19, 2017   | **Co-instructor**: Alex Filazzola [@alex_filazzola](https://twitter.com/alex_filazzola) 
-4 pm - 6 pm   | **Organizer**: Chris Lortie [@cjlortie](https://twitter.com/cjlortie)
+**Instructor**: [Katie Florko](https://twitter.com/kflorko?lang=en)
+
+**Co-instructor**: [Alex Filazzola](http://www.filazzola.info)
+
+**Organizer**: [Chris Lortie](www.christopherlortie.info)
+
+***
 
 ##General Information
 
