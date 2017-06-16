@@ -4,7 +4,7 @@ author: "Katie Florko"
 date: "June 16, 2017"
 output:
   html_document:
-    theme: sandstone
+    theme: yeti
     toc: true
     toc_float: true
 ---
