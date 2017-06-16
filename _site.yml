@@ -4,8 +4,6 @@ navbar:
   left:
     - text: "info"
       href: index.html
-    - text: "R.basics"
-      href: r.basics.html
     - text: "ggplot2"
       href: DataViz.intro.html
     - text: "Maps"
