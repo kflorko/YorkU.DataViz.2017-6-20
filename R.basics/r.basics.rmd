@@ -1,0 +1,205 @@
+---
+title: Introduction to R Studio and R Basics
+author: "Alex Filazzola"
+date: "April 28 2017"
+output:
+  html_document:
+    theme: sandstone
+    toc: true
+    toc_float: true
+---
+
+### 1.0 Introduction
+(modified from Julie Lowndes [workshop](http://remi-daigle.github.io/2016-04-15-UCSB/R_RStudio/))
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+![](Rlogo.png)
+
+
+To start off, it is a good idea to mention what is R and why anyone should bother to use it. R is a programming language that is typically used for data mangement and statistical analysis. Larger than that, R is a place where you can manage your data, analyze it, collaborate, and keep a record of what you do. R has a number of advantages over other statistical software. 
+
+1. R is free!
+2. R is a combination of many different software including:
+  + data manipulation
+  + statistical analysis
+  + graphics
+  + database
+  + automation
+  + computer learning
+3. R is open source allowing for people to develop new tools to be used in the R environment. 
+
+### 1.1 R basics, workspace and working directory
+
+Launch R studio
+
+Start by opening a new project under File -> New Project -> New Directory -> Empty Directory -> Name the project. Once your project has been opened open a R script under File -> New File -> R script. 
+
+Now you are ready to get started in R. Currently, R Studio should have four distinct panels. In the top left is your R script that will act as a notepad for everything you write. On the top right is the environment that stores objects that you load. We will discuss more about it later. On the bottom right is your working directory where your data and scripts are saved. Lastly, the bottom left is the R console that is where your R script is tested. 
+
+Let's start with some basic arithmetic. In the script section type the following. You can then run the code by selecting the line of code and clicking run in the top right corner or cmd/ctrl+R shortcut.
+
+```{r}
+3 * 4
+
+```
+
+R uses the <- symbol for variable assignment
+```{r}
+x <- 3
+x
+```
+
+Here on the left is the object, in this case x and on the right a value to be assigned. We can therefore assign numbers to objects and conduction functions on them
+```{r}
+x <- 3
+y <- 4
+x*y
+```
+
+Often we give objects names that are easier to understand. An object can be any combination of characters as long as it starts off with a letter and does not have any spaces.
+```{r}
+product.of.x.y <- x*y
+product.of.x.y
+```
+
+The computer is extremely literal with its inputs. Often mistakes such as typos and case-sensitivity will result in errors. Keeping simple names helps reduce that as a source of error. 
+
+Another commonality of R and programming is logical operators. These are as follows
+
+- `==` means 'is equal to'
+- `!=` means 'is not equal to'
+- `<` means ` is less than'
+- `>` means ` is greater than'
+- `<=` means ` is less than or equal to'
+- `>=` means ` is greater than or equal to'
+
+```{r}
+product.of.x.y == 12
+
+product.of.x.y < 5
+```
+
+One operator that is not common in programming but used for statistics is the tilda `~`. This operator represents "regressed" and will be discussed in the statistics part of this workshop.  
+
+### 1.2 Functions in R
+
+R has a near endless variety of functions that are available. Some are already loaded into what is referred to as *base R*, however, there are more that are coming out every day that are available through additional packages that can be installed. Here we are only going to cover those available in base R. First it is important to understand how functions work. 
+
+A function is in its most basic form is something that takes a list of arguments and does something with it. A simple example of this is the sequence function `seq()`. Sequence function has three basic arguments. The starting number, the ending number, and the number to increase by increments. 
+
+```{r}
+seq(from=1 , to=10, by=1)
+
+seq.2.5 <- seq(from=0, to=10, by=2.5)
+seq.2.5
+```
+
+Functions have an order to their arguments and some arguments that have default values. For instance, if we do not specify the *from* and *to* arguments, R assumes them to be the first and second values.
+
+```{r}
+seq(1,10,1)
+```
+
+R also treats the default *by* argument as 1 when no value is supplied. 
+```{r}
+seq(1,10)
+```
+
+R has your back and tries to run the function with the least amount of information you have provided. Becareful though!! Sometimes your function will run, but the defaults are incorrect. It is always best to go over the structure of your function. To do this we call on the help using a question mark `?seq`. 
+
+The help page is broken down into sections:
+ - Description: An extended description of what the function does.
+ - Usage: The arguments of the function and their default values.
+ - Arguments: An explanation of the data each argument is expecting.
+ - Details: Any important details to be aware of.
+ - Value: The data the function returns.
+ - See Also: Any related functions you might find useful.
+ - Examples: Some examples for how to use the function.
+
+### 1.3 R environment and types of data
+
+You may have noticed that in the top right panel values have been populated. Currently there should be four objects present. These represent objects you have loaded and that are saved in R. If you type any of these below such as `seq.2.5.` the respective values will be returned. 
+
+You can also see a list of these objects using a function
+```{r}
+objects() ## list objects in R
+```
+
+If you want to remove a particular object that could be interfering with something else you can as well
+```{r}
+rm(product.of.x.y) ## remove object
+```
+
+You may have also noticed that there are different types of data stored as objects. Lets take a look at some we have loaded already. The class function tells us what type data is stored.
+
+```{r}
+class(x)
+```
+
+Here x is classified as a numeric vector, meaning a one dimensional series of numbers. R has the capacity to store everything from numbers to images to website links all as objects.
+
+There is a basic data set that is loaded into R at all times for sample analyses called `cars`. We can see it here
+
+```{r}
+cars
+```
+
+The data is stored as a dataframe which is a multiple of vectors that are organized into columns with a heading. Let's take a look at what class it belongs to and top 5 rows. 
+```{r}
+class(cars) ## what is the class of cars
+head(cars,5) ## list top five rows
+```
+
+Dataframes are organized by a series of rows and columns. Using the square brackets `[]` we can reference certain portions of the dataframe. If we want a certain number of rows, the numbers that go before the comma correspond to the respective number of rows. 
+```{r}
+cars[1,] ## first row
+
+cars[1:5,] ## first five rows
+```
+
+Alternatively, if we want a particular column we can either use the column number or name that it corresponds to. This is placed after the comma 
+```{r}
+cars[,2] ## second column
+
+cars[,"dist"] ## second column using title
+```
+
+If we want a particular number we can combine these two values. This allows us to extract particular numbers or change them in the dataset
+```{r}
+cars[2,"dist"] ## second row, second column
+
+cars[2,"dist"] <- 9 ## change that value to 9
+
+cars[2,"dist"] ## check that the value was changed
+```
+
+Other popular data classes are `lists` and `matrices`. A list is a series of objects that have been grouped together into another object. A matrices is almost identical to a data frame except it uses numbers rather than names for the columns and rows. 
+
+### 1.4 Data visualization
+
+Lets do a simple plot of the cars data set. We want to compare speed by distance from the dataframe. However, right now each of those vectors is stored in the dataframe. We can extract them by the square brackets.
+
+```{r}
+speed <- cars[,"speed"]
+dist <- cars[,"dist"]
+```
+
+We can do a simple x by y plot and plot a line of best fit
+
+```{r}
+plot(speed, dist)
+z <- line(cars)
+abline(coef(z), col = "red")
+```
+
+Histogram is another function that is great for checking the distributions of a data set.  We can generate a random normal distribution using `rnorm` then check its shape using hist. 
+```{r}
+pop1 <- rnorm(100) ## generate 100 random numbers from a normal population
+
+hist(pop1) ## plot randomly generated numbers
+
+hist(dist) ## plot distribution of distances
+```

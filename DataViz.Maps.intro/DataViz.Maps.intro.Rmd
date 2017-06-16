@@ -1,0 +1,86 @@
+---
+title: "Data visualization workshop: making maps using ggplot2 and ggmap"
+author: "Katie Florko"
+date: "June 16, 2017"
+output:
+  html_document:
+    theme: sandstone
+    toc: true
+    toc_float: true
+---
+
+***
+# Introduction
+
+#### Getting started
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#load packages
+library(ggplot2)
+```
+
+
+***
+#### Getting started with data
+We will use the mtcars dataset
+```{r}
+head(mtcars, 6)
+```
+
+
+# Introduction to formatting
+```{r}
+#a basic plot
+ggplot(mtcars, aes(wt, mpg)) +geom_point()
+
+#different themes
+ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_bw()
+ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_classic()
+ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()
+
+#change axis labels
+ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") 
+
+#add title
+ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") + ggtitle("A nice title")
+#center title
+
+#color by gear (factor)
+ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = factor(gear)))
+
+#color by gear (continuous)
+ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = gear))
+
+#modify point size
+ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(size = disp, colour=factor(gear)))
+```
+# Other types of plots 
+## Box plots
+```{r}
+
+```
+
+## Line Graphs
+```{r}
+
+```
+
+## Bar Graphs
+```{r}
+
+```
+
+## Maps
+```{r}
+
+```
+
+# Facet grids and wraps
+```{r}
+
+```
+

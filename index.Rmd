@@ -1,47 +1,45 @@
 ---
-title: "An Introduction to R and Generalized Linear Models"
-date: "April 28, 2017"
+title: "Data visualization workshop: ggplot2 and ggmap"
+date: "June 19, 2017"
 output: html_document
 ---
-#### Presented by [AGSBS](http://agsbs.yugsa.ca/), [Ecoblender Lab](http://www.ecoblender.org/), and [York University](http://www.yorku.ca/index.html)
+#### Presented by [AGSBS](http://agsbs.yugsa.ca/), [Ecoblender](http://www.ecoblender.org), and [York University](http://www.yorku.ca/index.html)
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
 <div style="width:500px; height=350px">
-![](images/alex.jpg)
+![](images/katie.jpg)
 </div>
 
 York University | 
 ----------------|-----------------------------------
-April 28 2017   | **Instructor**: [Alex Filazzola](http://www.filazzola.info)
-10 am - 12 pm   | **Co-instructors**: Thomas Van Zuiden and Katie Florko
+June 19 2017   | **Instructor**: Katie Florko
+4 pm - 6 pm   | **Co-instructor**: Alex Filazzola
 
 ##General Information
 
-The purpose of this workshop is to provide tools for a new/novice analyst to more effectively and efficiently analyse their data in R. This hands-on workshop will introduce the basic concepts of R and use of generalized linear models in R to describe patterns. Participants will be encouraged to help one another and to apply what they have learned to their own problems.
+This workshop is designed to introduce participants to two packages: ggplot2 and ggmap. Both of these packages are efficient tools for data visualization, and have several formatting options. This workshop will go through creating different types of plots (i.e., density, stacked bar), formatting (i.e., facet grids), and maps (i.e., using ggplot2 and ggmap). Participants will be encouraged to help one another and to apply what they have learned to their own problems. 
 
-**Who**: The course is aimed at R beginners and novice to intermediate analysts. You do not need to have previous knowledge of R.
+**Who**: The course is aimed at R beginners and novice to intermediate analysts. 
 
-**Where**: 88 Pond Road, York University. Room 2114 DB (TEL). [Google maps](https://goo.gl/maps/fLeskquHNZs)
+**Where**: 154 Ottawa Road, York University. Room 306 Lumbers (TEL). [Google maps](https://goo.gl/maps/HPSwvGDFeNF2)
 
 **Requirements**: Participants should bring a laptop with a Mac, Linux, or Windows operating system (not a tablet, Chromebook, etc.) with administrative privileges. If you want to work along during tutorial, you must have R studio installed on your own computer. However, you are still welcome to attend because all examples will be presented via a projector in the classroom. Coffees and cookies provided for free. 
 
-**Contact**: Please contact alex.filazzola@outlook.com for more information.
+**Contact**: Please contact katieflorko@gmail.com for more information.
 
 ## Schedule
 
-[Live Notepad](https://docs.google.com/document/d/18RSBJ709HMAbzjhcPiq7dvkRRGxe41MrIdj-hq7KkpU/edit?usp=sharing)
-
 Time   | Goal
 -------|------------
-9:50   | Meet & greet. Test software
-10:00  | [R arithmetic and simple commands](R.basics//r.basics.html)
-10:30  | [R environment and visualization](R.basics//r.basics.html)
-10:55  | *coffee break*
-11:05  | [Introduction to GLMs](GLM.intro//GLM.intro.html)
-11:30  | [Conducting GLMs in R](GLM.intro//GLM.intro.html)
-12:00  | Final discussions
+3:50   | Meet & greet. Test software
+4:00  | [R basics and intro to ggplot2](R.basics//r.basics.html)
+4:30  | [Plotting and formatting in ggplot2](DataViz.intro//DataViz.intro.html)
+4:55  | *coffee break*
+5:05  | [Making maps using ggplot2 and ggmap](DataViz.Maps.intro//DataViz.Maps.intro.html)
+5:30  | Practice
+6:00  | Final discussions
 
 
 ## Software
