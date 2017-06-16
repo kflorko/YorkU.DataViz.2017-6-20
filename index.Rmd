@@ -1,5 +1,5 @@
 ---
-title: "Data visualization workshop: ggplot2 and ggmap"
+title: "Data visualization workshop: using ggplot2 and ggmap"
 date: "June 19, 2017"
 output: html_document
 ---
