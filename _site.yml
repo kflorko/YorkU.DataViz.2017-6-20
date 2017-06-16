@@ -1,6 +1,6 @@
-name: "YorkU.DataViz.2016-06-16"
+name: "YorkU.DataViz.2016-06-19"
 navbar:
-  title: "YorkU.DataViz.2017-06-16"
+  title: "YorkU.DataViz.2017-06-19"
   left:
     - text: "info"
       href: index.html
