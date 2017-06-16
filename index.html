@@ -4,15 +4,15 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
 
 
-<meta name="date" content="2017-04-28" />
+<meta name="date" content="2017-06-19" />
 
-<title>An Introduction to R and Generalized Linear Models</title>
+<title>Data visualization workshop: ggplot2 and ggmap</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -183,7 +183,10 @@ $(document).ready(function () {
   <a href="r.basics.html">R.basics</a>
 </li>
 <li>
-  <a href="GLM.intro.html">GLM.intro</a>
+  <a href="DataViz.intro.html">DataViz.intro</a>
+</li>
+<li>
+  <a href="DataViz.Maps.intro.html">DataViz.Maps.intro</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -197,17 +200,17 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">An Introduction to R and Generalized Linear Models</h1>
-<h4 class="date"><em>April 28, 2017</em></h4>
+<h1 class="title toc-ignore">Data visualization workshop: ggplot2 and ggmap</h1>
+<h4 class="date"><em>June 19, 2017</em></h4>
 
 </div>
 
 
-<div id="presented-by-agsbs-ecoblender-lab-and-york-university" class="section level4">
-<h4>Presented by <a href="http://agsbs.yugsa.ca/">AGSBS</a>, <a href="http://www.ecoblender.org/">Ecoblender Lab</a>, and <a href="http://www.yorku.ca/index.html">York University</a></h4>
+<div id="presented-by-agsbs-ecoblender-and-york-university" class="section level4">
+<h4>Presented by <a href="http://agsbs.yugsa.ca/">AGSBS</a>, <a href="http://www.ecoblender.org">Ecoblender</a>, and <a href="http://www.yorku.ca/index.html">York University</a></h4>
 <div style="width:500px; height=350px">
 <div class="figure">
-<img src="images/alex.jpg" />
+<img src="images/katie.jpg" />
 
 </div>
 </div>
@@ -220,27 +223,26 @@ $(document).ready(function () {
 </thead>
 <tbody>
 <tr class="odd">
-<td>April 28 2017</td>
-<td><strong>Instructor</strong>: <a href="http://www.filazzola.info">Alex Filazzola</a></td>
+<td>June 19 2017</td>
+<td><strong>Instructor</strong>: Katie Florko</td>
 </tr>
 <tr class="even">
-<td>10 am - 12 pm</td>
-<td><strong>Co-instructors</strong>: Thomas Van Zuiden and Katie Florko</td>
+<td>4 pm - 6 pm</td>
+<td><strong>Co-instructor</strong>: Alex Filazzola</td>
 </tr>
 </tbody>
 </table>
 </div>
 <div id="general-information" class="section level2">
 <h2>General Information</h2>
-<p>The purpose of this workshop is to provide tools for a new/novice analyst to more effectively and efficiently analyse their data in R. This hands-on workshop will introduce the basic concepts of R and use of generalized linear models in R to describe patterns. Participants will be encouraged to help one another and to apply what they have learned to their own problems.</p>
-<p><strong>Who</strong>: The course is aimed at R beginners and novice to intermediate analysts. You do not need to have previous knowledge of R.</p>
-<p><strong>Where</strong>: 88 Pond Road, York University. Room 2114 DB (TEL). <a href="https://goo.gl/maps/fLeskquHNZs">Google maps</a></p>
+<p>This workshop is designed to introduce participants to two packages: ggplot2 and ggmap. Both of these packages are efficient tools for data visualization, and have several formatting options. This workshop will go through creating different types of plots (i.e., density, stacked bar), formatting (i.e., facet grids), and maps (i.e., using ggplot2 and ggmap). Participants will be encouraged to help one another and to apply what they have learned to their own problems.</p>
+<p><strong>Who</strong>: The course is aimed at R beginners and novice to intermediate analysts.</p>
+<p><strong>Where</strong>: 154 Ottawa Road, York University. Room 306 Lumbers (TEL). <a href="https://goo.gl/maps/HPSwvGDFeNF2">Google maps</a></p>
 <p><strong>Requirements</strong>: Participants should bring a laptop with a Mac, Linux, or Windows operating system (not a tablet, Chromebook, etc.) with administrative privileges. If you want to work along during tutorial, you must have R studio installed on your own computer. However, you are still welcome to attend because all examples will be presented via a projector in the classroom. Coffees and cookies provided for free.</p>
-<p><strong>Contact</strong>: Please contact <a href="mailto:alex.filazzola@outlook.com">alex.filazzola@outlook.com</a> for more information.</p>
+<p><strong>Contact</strong>: Please contact <a href="mailto:katieflorko@gmail.com">katieflorko@gmail.com</a> for more information.</p>
 </div>
 <div id="schedule" class="section level2">
 <h2>Schedule</h2>
-<p><a href="https://docs.google.com/document/d/18RSBJ709HMAbzjhcPiq7dvkRRGxe41MrIdj-hq7KkpU/edit?usp=sharing">Live Notepad</a></p>
 <table>
 <thead>
 <tr class="header">
@@ -250,31 +252,31 @@ $(document).ready(function () {
 </thead>
 <tbody>
 <tr class="odd">
-<td>9:50</td>
+<td>3:50</td>
 <td>Meet &amp; greet. Test software</td>
 </tr>
 <tr class="even">
-<td>10:00</td>
-<td><a href="R.basics//r.basics.html">R arithmetic and simple commands</a></td>
+<td>4:00</td>
+<td><a href="R.basics//r.basics.html">R basics and intro to ggplot2</a></td>
 </tr>
 <tr class="odd">
-<td>10:30</td>
-<td><a href="R.basics//r.basics.html">R environment and visualization</a></td>
+<td>4:30</td>
+<td><a href="DataViz.intro//DataViz.intro.html">Plotting and formatting in ggplot2</a></td>
 </tr>
 <tr class="even">
-<td>10:55</td>
+<td>4:55</td>
 <td><em>coffee break</em></td>
 </tr>
 <tr class="odd">
-<td>11:05</td>
-<td><a href="GLM.intro//GLM.intro.html">Introduction to GLMs</a></td>
+<td>5:05</td>
+<td><a href="DataViz.Maps.intro//DataViz.Maps.intro.html">Making maps using ggplot2 and ggmap</a></td>
 </tr>
 <tr class="even">
-<td>11:30</td>
-<td><a href="GLM.intro//GLM.intro.html">Conducting GLMs in R</a></td>
+<td>5:30</td>
+<td>Practice</td>
 </tr>
 <tr class="odd">
-<td>12:00</td>
+<td>6:00</td>
 <td>Final discussions</td>
 </tr>
 </tbody>
@@ -344,7 +346,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
