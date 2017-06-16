@@ -35,7 +35,7 @@ Time   | Goal
 -------|------------
 3:50   | Meet & greet. Test software
 4:00  | [R basics and intro to ggplot2](R.basics//r.basics.html)
-4:30  | [Plotting and formatting in ggplot2](DataViz.intro//DataViz.intro.html)
+4:30  | [Plotting and formatting in ggplot2](DataViz.intro.rmd//DataViz.intro.html)
 4:55  | *coffee break*
 5:05  | [Making maps using ggplot2 and ggmap](DataViz.Maps.intro//DataViz.Maps.intro.html)
 5:30  | Practice
