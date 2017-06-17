@@ -59,9 +59,15 @@ ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = gear))
 ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(size = disp, colour=factor(gear)))
 ```
 # Other types of plots 
-## Box plots
-```{r}
 
+## Box plots
+We need factoral data to make a boxplot. In the code, we will refer to gears and cyl as factors (i.e., as.factor(mtcars$gear)), but if you are doing this with your own data, the variable you will want to look via a boxplot should already be a factor
+```{r}
+as.factor(mtcars$gear)
+ggplot(mtcars, aes(x = as.factor(mtcars$gear), y = wt, group =as.factor(mtcars$cyl))) +geom_boxplot()
+
+library(tidyverse)
+data <- read_csv("bears.csv")
 ```
 
 ## Line Graphs
