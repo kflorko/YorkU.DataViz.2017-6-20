@@ -26,34 +26,41 @@ library(ggplot2)
 
 ***
 #### Getting started with data
-We will use the mtcars dataset
+We will use a made up dataset on polar bears
 ```{r}
-head(mtcars, 6)
+data <- read_csv("bears.csv")
+head(data, 5)
 ```
 
 
 # Introduction to formatting
 ```{r}
 #a basic plot
-ggplot(mtcars, aes(wt, mpg)) +geom_point()
+ggplot(data, aes(Year, Seal)) +geom_point()
 
 #different themes
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_bw()
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_classic()
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_bw()
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_classic()
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()
 
 #change axis labels
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") 
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion of seal in polar diet (%)") 
+
+#split up text
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") 
 
 #add title
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") + ggtitle("A nice title")
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")
+
 #center title
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
 
-#color by gear (factor)
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = factor(gear)))
+#color by sex (a factor)
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point(aes(color=Sex))+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
 
-#color by gear (continuous)
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = gear))
+
+#color by gear (a continuous variable)
+ggplot(data, aes(as.factor(Year), Seal)) +geom_point(aes(color=Bodycond))+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)")+ ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
 
 #modify point size
 ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(size = disp, colour=factor(gear)))
@@ -66,7 +73,6 @@ We need factoral data to make a boxplot. In the code, we will refer to gears and
 as.factor(mtcars$gear)
 ggplot(mtcars, aes(x = as.factor(mtcars$gear), y = wt, group =as.factor(mtcars$cyl))) +geom_boxplot()
 
-library(tidyverse)
 data <- read_csv("bears.csv")
 ```
 
