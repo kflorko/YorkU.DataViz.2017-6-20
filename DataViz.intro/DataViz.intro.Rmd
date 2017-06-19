@@ -52,14 +52,14 @@ ggplot(data, aes(x=Seal))+geom_histogram(color="black",fill="blue", binwidth=10)
 ggplot(data, aes(x=Seal))+geom_histogram(color="black",fill="blue", alpha=0.5, binwidth=10)
 
 #Histogram: group by
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5)
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5,position=position_dodge())#seperate
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5)
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5,position=position_dodge())#seperate
 
 #Dotplot
 ggplot(data, aes(x=Seal))+geom_dotplot(alpha=0.4, binwidth=2.5, fill="red")
 
 #Dotplot: group by
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7, binwidth=2.5)
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7, binwidth=2.5)
 ```
 
 #Two variables
