@@ -69,4 +69,4 @@ Install R by downloading and running [this .exe](http://cran.r-project.org/bin/w
 ![](images/meetup.jpg)
 </div>
 <div style="width:539px; height=1077">
-![](images/ggplot2.pdf)
+![](images/ggplot2.jpg)
