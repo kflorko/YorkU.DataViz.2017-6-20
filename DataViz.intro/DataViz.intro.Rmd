@@ -34,176 +34,150 @@ data <- read.csv("bears.csv")
 head(data, 5)
 ```
 
-
-# Introduction to formatting
-```{r}
-#a basic plot
-ggplot(data, aes(Year, Seal)) +geom_point()
-
-#different themes
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_bw()
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_classic()
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()
-
-#change axis labels
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion of seal in polar diet (%)") 
-
-#split up text
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") 
-
-#add title
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")
-
-#center title
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point()+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
-
-#change color of all points
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point(color="red")+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
-
-#color by sex (a factor)
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point(aes(color=Sex))+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)") + ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
-
-
-#color by gear (a continuous variable)
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point(aes(color=Bodycond))+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)")+ ggtitle("A nice title")+theme(plot.title = element_text(hjust = 0.5))
-
-#change legend title
-ggplot(data, aes(as.factor(Year), Seal)) +geom_point(aes(color=Bodycond))+theme_grey()+labs(x = "Year",y ="Mean proportion\nof seal in polar diet (%)")+ ggtitle("A nice title")+scale_color_continuous(name="Body\nCondition")
-
-
-#modify point size
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(size = disp, colour=factor(gear)))
-```
-
 #Exploratory
 ```{r}
 #Density plot
-ggplot(data, aes(x=Seal))+geom_density(alpha=0.4, fill="deepskyblue2", color="deepskyblue2")
+ggplot(data, aes(x=Seal))+geom_density()
+ggplot(data, aes(x=Seal))+geom_density(color="red")
+ggplot(data, aes(x=Seal))+geom_density(fill="blue", color="red")
 
 #Density plot: group by
-dat <- subset(data, Region == "North" | Region == "Central")
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.7)+labs(x = "x variable")+scale_fill_manual(values=c("violetred3", "deepskyblue2"))+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density()
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.4)
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.4) + scale_color_manual(values=c("red", "green", "blue"))
 
 #Histogram
-ggplot(data, aes(x=Seal))+geom_histogram(alpha=0.4, fill="deepskyblue2", color="deepskyblue2", binwidth=10)+labs(x="x variable")
+ggplot(data, aes(x=Seal))+geom_histogram(binwidth=10)
+ggplot(data, aes(x=Seal))+geom_histogram(color="black",fill="blue", binwidth=10)
+ggplot(data, aes(x=Seal))+geom_histogram(color="black",fill="blue", alpha=0.5, binwidth=10)
 
 #Histogram: group by
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5)+labs(x = "x variable")+scale_fill_manual(values=c("violetred3", "deepskyblue2"))+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5)
+ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0.7, binwidth=5,position=position_dodge())#seperate
 
 #Dotplot
-ggplot(data, aes(x=Seal))+geom_dotplot(alpha=0.4, fill="deepskyblue2", color="deepskyblue2")+labs(x="x variable")
+ggplot(data, aes(x=Seal))+geom_dotplot(alpha=0.4, binwidth=2.5, fill="red")
 
 #Dotplot: group by
-ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7, binwidth=2.3)+labs(x = "x variable")+scale_fill_manual(values=c("violetred3", "deepskyblue2"))+scale_color_manual(values=c("violetred3", "deepskyblue2"))
-
+ggplot(dat, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7, binwidth=2.5)
 ```
 
 #Two variables
 ## X Continuous, Y Continuous
 ```{r}
 #Scatter plot
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()
 
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()
+
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+scale_color_manual(values=c("black", "red"))
 
 #Add smooth line
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth()
 
 #Add a lm line
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth(fill="deepskyblue2", color="deepskyblue2", method=lm)+labs(x = "x variable", y = "y variable")
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth(method=lm)
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth(method=lm, level=0.5) #level=alpha
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_smooth(method=lm, se=FALSE)
+
+#layer!
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+scale_color_manual(values=c("black", "red"))+geom_smooth(method=lm, se=FALSE)
 
 #Line plot
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_line()+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_line()
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_line()
 
 ```
 
 ## X Continuous, Y Continuous
 ```{r}
 #Boxplot
-ggplot(data, aes(x=Region, y=Seal))+geom_boxplot(alpha=0.5, color="deepskyblue2", fill ="deepskyblue2")+labs(x = "x variable", y = "y variable")
+ggplot(data, aes(x=Region, y=Seal))+geom_boxplot(alpha=0.5)
 
 #Boxplot: group by
-ggplot(data, aes(x=Region, y=Seal))+geom_boxplot(alpha=0.5, aes(fill = Sex, color=Sex))+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred3", "deepskyblue2"))+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Region, y=Seal))+geom_boxplot(alpha=0.5, aes(fill = Sex, color=Sex))
 
 #Barplot
-ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(stat="identity", alpha=0.7, fill="deepskyblue2")+labs(x = "x variable", y = "y variable")
+ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(stat="identity")
 
-ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Sex), stat="identity", alpha=0.7)+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred3", "deepskyblue2"))+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Sex), stat="identity")
 
-ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Sex), stat="identity", position=position_dodge(),alpha=0.7)+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred2", "deepskyblue1"))+scale_color_manual(values=c("violetred2", "deepskyblue1"))
+ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Sex), stat="identity", position=position_dodge())
 
 #Violin plot
-ggplot(data, aes(x=Region, y=Seal)) + geom_violin(alpha=0.7, fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")
+ggplot(data, aes(x=Region, y=Seal)) + geom_violin(fill="black", alpha=0.4)
 ```
 
 #Themes
 ```{r}
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_grey()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_grey()
 
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_classic()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_classic()
 
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_bw()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_bw()
 
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_minimal()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_minimal()
 
 #Theme modifications
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_grey()+ theme(axis.text.x = element_text(size=20))
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_grey()+ theme(axis.text.x = element_text(size=20))
 
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_grey()+ theme(panel.grid.major = element_line(color= "black"))
 
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_grey()+ theme(panel.grid.major = element_line(color= "black"))
-
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x variable", y = "y variable")+theme_grey()+  theme(plot.background = element_rect(fill="green"))
-
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_grey()+theme_grey()+  theme(plot.background = element_rect(fill="green"))
 ```
 
 #Labels and titles
 ```{r}
 #add titles
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x axis title", y = "y axis title", title="a nice title")+theme_grey()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice title")
 
 #split up text
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x axis title", y = "y axis title", title="a nice\ntitle")+theme_grey()
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice\ntitle")
 
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(fill="deepskyblue2", color="deepskyblue2")+labs(x = "x axis title", y = "y axis title", title="a nice\ntitle")+theme_grey()+ theme(plot.title = element_text(hjust = 0.5))
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice\ntitle")+theme(plot.title = element_text(hjust = 0.5))
 ```
 
 #Legends
 ```{r}
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))+ scale_fill_manual(name = "New title", breaks = c("M","F"), labels = c("Males", "Females"))
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+ scale_color_manual(values=c("black","blue"), name = "New title", breaks = c("M","F"), labels = c("Males","Females"))
 
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+labs(x = "x variable", y = "y variable")+ scale_color_manual(values=c("deepskyblue2","violetred3"), name = "New title", breaks = c("M","F"), labels = c("Males","Females")) +theme(legend.position="top")
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+ scale_color_manual(values=c("black","blue"), name = "New title", breaks = c("M","F"), labels = c("Males","Females")) +theme(legend.position="top")
 ```
 
 #Scale/colors
 ```{r}
 #basic point colors
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(color="violetred3")
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(color="blue")
 
 #qualitative
+ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Ageclass), stat="identity", position=position_dodge())
+
 ggplot(data=data, aes(x=Region, y=Seal)) + geom_bar(aes(fill=Ageclass), stat="identity", position=position_dodge())+ scale_fill_brewer(palette = "Accent")
 
 #sequential
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()
 ggplot(data, aes(x=Seal, y=Bodycond))+geom_point(aes(color=Year))+scale_fill_brewer(palette = "gradient")
 ```
 
 #Point shapes and sizes
 ```{r}
 #shape by factor variable
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(shape=Sex))+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(shape=Sex)) +scale_color_manual(values=c("black", "blue"))
 
 #manual shape selection
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(shape=Sex))+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))+scale_shape_manual(values=c(3,4))
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(shape=Sex)) +scale_color_manual(values=c("black", "blue"))+scale_shape_manual(values=c(3,4))
 
 #size by continuous variable
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(size=Walrus))+labs(x = "x variable", y = "y variable")+scale_color_manual(values=c("violetred3", "deepskyblue2"))
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point(aes(size=Walrus)) +scale_color_manual(values=c("blue", "red"))
 
+#see shapes
 shapes <- data.frame(
   shape = c(0:19, 22, 21, 24, 23, 20),
   x = 0:24 %/% 5,
   y = -(0:24 %% 5)
 )
 ggplot(shapes, aes(x, y)) + 
-  geom_point(aes(shape = shape), size = 5, fill = "violetred3") +
+  geom_point(aes(shape = shape), size = 5, fill = "red") +
   geom_text(aes(label = shape), hjust = 0, nudge_x = 0.15) +
   scale_shape_identity() +
   expand_limits(x = 4.1) +
@@ -217,14 +191,13 @@ ggplot(shapes, aes(x, y)) +
 datag <- data %>% gather(Prey, Proportion, Seal:Walrus)
 
 #facet vertical
-ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9),alpha=0.7)+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred2", "deepskyblue1"))+scale_color_manual(values=c("violetred2", "deepskyblue1"))+facet_grid(~Ageclass)
+ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_grid(~Ageclass)
 
 #facet horizontal
-ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9),alpha=0.7)+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred2", "deepskyblue1"))+scale_color_manual(values=c("violetred2", "deepskyblue1"))+facet_grid(Region~.)
+ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_grid(Region~.)
 
 #facet vertical and horizontal
-ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9),alpha=0.7)+labs(x = "x variable", y = "y variable")+scale_fill_manual(values=c("violetred2", "deepskyblue1"))+scale_color_manual(values=c("violetred2", "deepskyblue1"))+facet_grid(Region~Ageclass)
-
+ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_grid(Region~Ageclass)
 ```
 
 #Centroids and error bars
@@ -237,7 +210,35 @@ ggplot(data, aes(Bodycond,Seal,color=Sex))+
   geom_point(size=1)+
   geom_point(data=centroids, aes(Bodycond,Seal,color=Sex),size=4)+
   geom_errorbar(data=centroids,aes(ymin=Seal-se.y,ymax=Seal+se.y),width=1)+
-  geom_errorbarh(data=centroids,aes(xmin=Bodycond-se.x,xmax=Bodycond+se.x),height=2)+scale_color_manual(values=c("violetred2", "deepskyblue1"))
+  geom_errorbarh(data=centroids,aes(xmin=Bodycond-se.x,xmax=Bodycond+se.x),height=2)+scale_color_manual(values=c("black", "blue"))
+```
 
+#More advanced: mean line graphs
+```{r}
+#take mean value
+myData <- aggregate(datag$Proportion,by = list(Prey = datag$Prey, Year = datag$Year, Sex = datag$Sex, Region = datag$Region),FUN = function(x) c(mean = mean(x), sd = sd(x),n = length(x)))
+myData1 <- do.call(data.frame, myData)
+myData1$se <- myData1$x.sd / sqrt(myData1$x.n)
+colnames(myData1) <- c("Prey", "Year","Sex", "Region","mean", "sd", "n", "se")
+myData1$names <- c(paste(myData1$Prey, "Prey /", myData1$Year, "Year"))
+dodge <- position_dodge(width = 0.9)
+limits <- aes(ymax = myData1$mean + myData1$se,ymin = myData1$mean - myData1$se)
+
+##For lipid
+myDatab <- aggregate(datag$Bodycond,by = list(Year = datag$Year, Sex = datag$Sex, Region = datag$Region, Prey = datag$Prey),FUN = function(x) c(mean = mean(x), sd = sd(x),n = length(x)))
+myDatabc <- do.call(data.frame, myDatab)
+myDatabc$se <- myDatabc$x.sd / sqrt(myDatabc$x.n)
+colnames(myDatabc) <- c("Year","Sex", "Region","Prey","mean", "sd", "n", "se")
+myDatabc$names <- c(paste(myDatabc$Preyspecies, "Prey /", myDatabc$Year, "Year"))
+dodge <- position_dodge(width = 0.9)
+limits <- aes(ymax = myDatabc$mean + myDatabc$se,ymin = myDatabc$mean - myDatabc$se)
+
+####This is a plot with colors of all prey on one graph
+p<- ggplot(myData1, aes(x=Year, y=mean, group=Prey, color=Prey, shape = Prey)) +
+  geom_line()+
+  geom_point(size=2) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean + se),width = .25, na.rm = TRUE) +
+  labs(x="Year", y = "Estimated contribution to polar bear diet (%)")+theme(panel.background = element_rect(fill = 'grey98', colour = 'black'), plot.title = element_text(hjust = 'center')) + theme_bw() + scale_x_continuous(breaks = pretty(myDatabc$Year, n = 5)) +facet_grid(Sex~Region, scales="free_x")+geom_line(data=myDatabc,aes(color="Bodycond", group="Prey"), size=1)+geom_point(data=myDatabc, aes(color="Bodycond", shape="Bodycond"))+geom_errorbar(data = myDatabc, aes(ymin=mean-se, ymax=mean + se),width = .25, na.rm = TRUE, color="black")+scale_color_manual(values=c("lightskyblue","black","violetred3","turquoise4"))+scale_shape_manual(values=c(15:18,4))+scale_y_continuous("Estimated contribution to polar bear diet (%)", sec.axis = sec_axis(~ .* 1.00, name = "Body condition"))+theme(plot.title = element_text(hjust = 0.5))+theme_grey()
+p
 ```
 
