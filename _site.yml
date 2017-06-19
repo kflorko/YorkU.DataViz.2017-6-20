@@ -5,9 +5,9 @@ navbar:
     - text: "info"
       href: index.html
     - text: "ggplot2"
-      href: DataViz.intro.html
+      href: DataViz.intro/DataViz.intro.html
     - text: "Maps"
-      href: DataViz.Maps.intro.html
+      href: DataViz.Maps.intro/DataViz.Maps.intro.html
 output_dir: "."
 output:
   html_document:
