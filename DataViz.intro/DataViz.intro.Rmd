@@ -242,3 +242,15 @@ p<- ggplot(myData1, aes(x=Year, y=mean, group=Prey, color=Prey, shape = Prey)) +
 p
 ```
 
+
+```{r}
+install.packages("ggmap")
+library(ggmap)
+
+library(ggmap)
+qmap(location = "boston university")
+qmap(location = "boston university", zoom = 14)
+qmap(location = "boston university", zoom = 14, source = "osm")
+
+```
+

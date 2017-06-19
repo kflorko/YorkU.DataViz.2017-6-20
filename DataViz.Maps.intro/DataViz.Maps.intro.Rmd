@@ -21,66 +21,166 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 #load packages
 library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(ggmap)
 ```
 
 
 ***
 #### Getting started with data
-We will use the mtcars dataset
+We will use a made up dataset on polar bears
 ```{r}
-head(mtcars, 6)
+setwd("~/Documents/R/YorkU.DataViz.2017-06-19/data")
+data <- read.csv("bears.csv")
+head(data, 5)
 ```
 
-
-# Introduction to formatting
+#First, use ggplot2
 ```{r}
-#a basic plot
-ggplot(mtcars, aes(wt, mpg)) +geom_point()
+world<-map_data("world", "Canada")
+w <- fortify(world)
 
-#different themes
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_bw()
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_classic()
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()
+map <-ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)
 
-#change axis labels
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") 
+map + geom_point(data=data, aes(Long, Lat))
 
-#add title
-ggplot(mtcars, aes(wt, mpg)) +geom_point()+theme_grey()+labs(x = "Weight", y = "Miles per gallon") + ggtitle("A nice title")
-#center title
-
-#color by gear (factor)
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = factor(gear)))
-
-#color by gear (continuous)
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(colour = gear))
-
-#modify point size
-ggplot(mtcars, aes(wt, mpg))+ geom_point(aes(size = disp, colour=factor(gear)))
-```
-# Other types of plots 
-## Box plots
-```{r}
-
+map + geom_point(data=data, aes(Long, Lat, shape=Sex, color=Sex),size=3)+  scale_color_manual(name="Sex", values=c("red","black")) + scale_shape_manual(name="Sex", values=c(15:16))
 ```
 
-## Line Graphs
+#Change color/shape of variables: Discrete variable
 ```{r}
+#Basic
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
 
+#Color by ageclass
+ggplot(data, aes(Long,Lat, color=Ageclass)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
+
+#Manually select colors
+ggplot(data, aes(Long,Lat, color=Ageclass)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+  scale_color_manual(name="Ageclass", values=c("red","black","green"))
+
+#Shape and color by ageclass 
+ggplot(data, aes(Long,Lat, color=Ageclass)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat, shape=Ageclass))+  scale_color_manual(name="Ageclass", values=c("red","black","green"))+ scale_shape_manual(name="Ageclass", values=c(15:17))
 ```
 
-## Bar Graphs
+#Change color/size of variables: Continuous variable
 ```{r}
+#Basic
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
 
+#Color by Bodycond
+ggplot(data, aes(Long,Lat, color=Bodycond)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
+
+
+#Color by Bodycond: manually set limits and colors
+ggplot(data, aes(Long,Lat, color=Bodycond)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+scale_color_gradient(limits=c(0,100), low = "green", high = "black", name = "A nice\nnew title")
+
+#Color by Bodycond: break up gradient legend
+ggplot(data, aes(Long,Lat, color=Bodycond)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+scale_color_continuous(limits=c(40,100), low = "green", high = "black", name = "Body\ncondition",breaks = c(45, 95), labels = c("Skinny", "Fat"))
+
+#Size by Bodycond: break up gradient legend
+ggplot(data, aes(Long,Lat, color=Bodycond)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat, size=Walrus))+scale_color_continuous(limits=c(40,100), low = "green", high = "black", name = "Body\ncondition",breaks = c(45, 95), labels = c("Skinny", "Fat"))
 ```
 
-## Maps
+#Add text
 ```{r}
+#Basic
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
 
+#Add title
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+labs(title="New title")
+
+#Add place names
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+labs(title="New title")+geom_text(aes(x=-127, y=68.5, label="N.W.T."), size=3, , color = "black")+geom_text(aes(x=-135, y=75, label="Beaufort\nSea"), size=4, color = "darkblue", fontface = "italic")+geom_text(aes(x=-110, y=71, label="Victoria\nIs."), size=3,color = "black")+geom_text(aes(x=-121, y=73, label="Banks\nIs."), size=3, , color = "black")+geom_text(aes(x=-111.5, y=75.75, label="Viscount\nMelville Is."), size=3, , color = "black") 
 ```
 
-# Facet grids and wraps
+#Ellipses
 ```{r}
+#Add ellipse to all points
+map <-ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+geom_point(data=data, aes(Long, Lat, shape=Sex, color=Sex))+  scale_color_manual(name="Sex", values=c("red","blue")) + scale_shape_manual(name="Sex", values=c(15:16))
 
+l<- map+geom_point(data=data, aes(x=Long, y=Lat, shape=Sex,color = Sex))+
+stat_ellipse(geom="polygon", fill=NA,color="black",level = 0.50, type="t", size=2)+
+stat_ellipse(geom="polygon", fill=NA, color="black",level = 0.75, type="t", linetype=2)
+l
+
+#Add ellipse, based on factor variable
+map<-ggplot(data, aes(Long, Lat, color = Sex)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat, group=group)) + xlab("Longitude") +ylab("Latitude") + ylim(67.5, 76.5) + xlim(-142,-100) +coord_map() +guides(fill = guide_legend(reverse = TRUE))
+
+l <- map  + geom_point(data=data, aes(x=Long, y=Lat, shape=Sex,color = Sex)) + theme_bw()  + coord_map() +guides(fill = guide_legend(reverse = TRUE))+
+stat_ellipse(geom="polygon", fill=NA, level = 0.50, type="t", size=2)+
+stat_ellipse(geom="polygon", fill=NA, level = 0.75, type="t", linetype=2)+ ggtitle("All1, all bears, all FA")+  scale_color_manual(name="Sex", values=c("blue","red")) + scale_shape_manual(name="Sex", values=c(15:16))
+l
 ```
+
+#Add heat map
+
+```{r}
+map <- ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))
+
+heat <- map +stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour=NA, na.rm = TRUE, bins=20,h=10) + scale_fill_continuous(low="green",high="red")  +
+labs(fill = "Sampling\nIntensity")  + guides(alpha="none") +geom_point(na.rm=TRUE) + theme(legend.position = c(0.14, 0.65),panel.grid.major = element_line(colour = "white"))
+heat
+
+#change number of bands (bandwidth = bins) and number of grid points in each direction (n)
+heat <- map +stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour=NA, na.rm = TRUE, bins=5,h=9) + scale_fill_continuous(low="green",high="red")  +
+labs(fill = "Sampling\nIntensity")  + guides(alpha="none") +geom_point(na.rm=TRUE)
+heat
+
+#while we're here, change location of legend 
+heat <- map +stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour=NA, na.rm = TRUE, bins=5,h=9) + scale_fill_continuous(low="green",high="red")  +
+labs(fill = "Sampling\nIntensity")  + guides(alpha="none") +geom_point(na.rm=TRUE) + theme(legend.position = c(0.1, 0.7),panel.grid.major = element_line(colour = "white"))
+heat
+
+#and change background to transparent
+heat <- map +stat_density2d(aes(fill=..level..,alpha=..level..),geom='polygon',colour=NA, na.rm = TRUE, bins=5,h=9) + scale_fill_continuous(low="green",high="red")  +
+labs(fill = "Sampling\nIntensity")  + guides(alpha="none") +geom_point(na.rm=TRUE) + theme(legend.position = c(0.1, 0.7),panel.grid.major = element_line(colour = "white"), legend.background = element_rect(fill="NA"))
+heat
+```
+
+#GGMAP
+The only difference here is that you can "get_map" and formatting is set up to automatically make it a map (without having to call it a geom_polygon)
+```{r}
+geocode("york university")
+geocode("cn tower", output="all")
+
+qmap(location="northamerica", zoom=3)
+qmap(location="york university")
+qmap(location="york university", zoom = 14, extent="normal")
+
+qmap(location="northamerica", zoom=3)
+```
+
+##plot crimes in houston
+```{r}
+# first, subset to have only violent crimes
+violent_crimes <- subset(crime,offense != "auto theft" & offense != "theft" & offense != "burglary")
+
+# subset area to downtown
+violent_crimes <- subset(violent_crimes,
+  -95.39681 <= lon & lon <= -95.34188 &
+   29.73631 <= lat & lat <=  29.78400)
+
+#make basemap
+HoustonMap <- qmap("houston", zoom = 14,color = "bw")
+
+#add layer with crime location data
+HoustonMap +geom_point(aes(x = lon, y = lat),data = violent_crimes)
+
+#Color by type of crime
+HoustonMap +geom_point(aes(x = lon, y = lat,colour = offense),data = violent_crimes)
+```
+
+#another heat map example
+```{r}
+#make basemap
+houston <- get_map(location = "houston", zoom = 14, color = "bw")
+HoustonMap <- ggmap(houston, base_layer = ggplot(aes(x = lon, y = lat), data = violent_crimes))
+
+#add crimes (stat_density2d) and by offense (facet_wrap)
+HoustonMap + stat_density2d(aes(x = lon, y = lat, fill = ..level.., alpha= ..level..),
+bins = 5, geom = "polygon",
+data = violent_crimes) +scale_fill_gradient(low = "green",high= "red") +facet_wrap(~ offense)
+```
+
 
