@@ -38,7 +38,7 @@ head(data, 5)
 
 #First, use ggplot2
 ```{r}
-world<-map_data("world", "Canada")
+world<-map_data("world","Canada")
 w <- fortify(world)
 
 map <-ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)
@@ -91,7 +91,7 @@ ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50
 ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+labs(title="New title")
 
 #Add place names
-ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+labs(title="New title")+geom_text(aes(x=-127, y=68.5, label="N.W.T."), size=3, , color = "black")+geom_text(aes(x=-135, y=75, label="Beaufort\nSea"), size=4, color = "darkblue", fontface = "italic")+geom_text(aes(x=-110, y=71, label="Victoria\nIs."), size=3,color = "black")+geom_text(aes(x=-121, y=73, label="Banks\nIs."), size=3, , color = "black")+geom_text(aes(x=-111.5, y=75.75, label="Viscount\nMelville Is."), size=3, , color = "black") 
+ggplot(data, aes(Long,Lat)) + geom_polygon(data=w, colour="grey50", fill="grey50", aes(x=long, y=lat))+coord_map()+ ylim(67.5, 76.5) + xlim(-142,-100)+ geom_point(data=data, aes(Long, Lat))+labs(title="New title")+geom_text(aes(x=-127, y=68.5, label="N.W.T."), size=3,color = "black")+geom_text(aes(x=-135, y=75, label="Beaufort\nSea"), size=4, color = "darkblue", fontface = "italic")+geom_text(aes(x=-110, y=71, label="Victoria\nIs."), size=3,color = "black")+geom_text(aes(x=-121, y=73, label="Banks\nIs."), size=3, color = "black")+geom_text(aes(x=-111.5, y=75.75, label="Viscount\nMelville Is."), size=3, color = "black") 
 ```
 
 #Ellipses
@@ -144,7 +144,7 @@ The only difference here is that you can "get_map" and formatting is set up to a
 geocode("york university")
 geocode("cn tower", output="all")
 
-qmap(location="northamerica", zoom=3)
+qmap(location="northamerica", zoom=5)
 qmap(location="york university")
 qmap(location="york university", zoom = 14, extent="normal")
 
@@ -180,7 +180,8 @@ HoustonMap <- ggmap(houston, base_layer = ggplot(aes(x = lon, y = lat), data = v
 #add crimes (stat_density2d) and by offense (facet_wrap)
 HoustonMap + stat_density2d(aes(x = lon, y = lat, fill = ..level.., alpha= ..level..),
 bins = 5, geom = "polygon",
-data = violent_crimes) +scale_fill_gradient(low = "green",high= "red") +facet_wrap(~ offense)
+data = violent_crimes) +scale_fill_gradient(low = "green",high= "red") +facet_wrap(~ month)
+
 ```
 
 

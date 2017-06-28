@@ -43,7 +43,7 @@ ggplot(data, aes(x=Seal))+geom_density(fill="blue", color="red")
 
 #Density plot: group by
 ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density()
-ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.4)
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.2)
 ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_density(alpha=0.4) + scale_color_manual(values=c("red", "green", "blue"))
 
 #Histogram
@@ -59,7 +59,7 @@ ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_histogram(alpha=0
 ggplot(data, aes(x=Seal))+geom_dotplot(alpha=0.4, binwidth=2.5, fill="red")
 
 #Dotplot: group by
-ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7, binwidth=2.5)
+ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7)
 ```
 
 #Two variables
@@ -67,6 +67,8 @@ ggplot(data, aes(x=Bodycond,color=Region, fill=Region)) + geom_dotplot(alpha=0.7
 ```{r}
 #Scatter plot
 ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()
+ggplot(data, aes(Seal~Bodycond))+geom_point()
+ggplot(data, aes(Seal,Bodycond))+geom_point()
 
 ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()
 
@@ -129,7 +131,7 @@ ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+theme_grey()+theme_grey()+  t
 #Labels and titles
 ```{r}
 #add titles
-ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice title")
+ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice title", subtitle="subtitle")
 
 #split up text
 ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = "y axis title", title="a nice\ntitle")
@@ -141,7 +143,7 @@ ggplot(data, aes(x=Seal, y=Bodycond))+geom_point()+labs(x = "x axis title", y = 
 ```{r}
 ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+ scale_color_manual(values=c("black","blue"), name = "New title", breaks = c("M","F"), labels = c("Males","Females"))
 
-ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+ scale_color_manual(values=c("black","blue"), name = "New title", breaks = c("M","F"), labels = c("Males","Females")) +theme(legend.position="top")
+ggplot(data, aes(x=Seal, y=Bodycond, color=Sex))+geom_point()+ scale_color_manual(values=c("black","blue"), name = "New title", breaks = c("M","F"), labels = c("Males","Females")) +theme(legend.position="bottom")
 ```
 
 #Scale/colors
@@ -196,6 +198,8 @@ ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identit
 #facet horizontal
 ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_grid(Region~.)
 
+ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_wrap(Region)
+
 #facet vertical and horizontal
 ggplot(data=datag, aes(x=Prey, y=Proportion, fill=Sex)) + geom_bar(stat="identity", position=position_dodge(0.9))+facet_grid(Region~Ageclass)
 ```
@@ -238,19 +242,8 @@ p<- ggplot(myData1, aes(x=Year, y=mean, group=Prey, color=Prey, shape = Prey)) +
   geom_line()+
   geom_point(size=2) +
   geom_errorbar(aes(ymin=mean-se, ymax=mean + se),width = .25, na.rm = TRUE) +
-  labs(x="Year", y = "Estimated contribution to polar bear diet (%)")+theme(panel.background = element_rect(fill = 'grey98', colour = 'black'), plot.title = element_text(hjust = 'center')) + theme_bw() + scale_x_continuous(breaks = pretty(myDatabc$Year, n = 5)) +facet_grid(Sex~Region, scales="free_x")+geom_line(data=myDatabc,aes(color="Bodycond", group="Prey"), size=1)+geom_point(data=myDatabc, aes(color="Bodycond", shape="Bodycond"))+geom_errorbar(data = myDatabc, aes(ymin=mean-se, ymax=mean + se),width = .25, na.rm = TRUE, color="black")+scale_color_manual(values=c("lightskyblue","black","violetred3","turquoise4"))+scale_shape_manual(values=c(15:18,4))+scale_y_continuous("Estimated contribution to polar bear diet (%)", sec.axis = sec_axis(~ .* 1.00, name = "Body condition"))+theme(plot.title = element_text(hjust = 0.5))+theme_grey()
+  labs(x="Year", y = "Estimated contribution to polar bear diet (%)")+theme(panel.background = element_rect(fill = 'grey98', colour = 'black'), plot.title = element_text(hjust = 'center')) + theme_bw() + scale_x_continuous(breaks = pretty(myDatabc$Year, n = 5)) +facet_grid(Sex~Region, scales="free_x")+geom_line(data=myDatabc,aes(color="Bodycond", group="Prey", alpha=0.5), size=1)+geom_point(data=myDatabc, aes(color="Bodycond", shape="Bodycond"))+geom_errorbar(data = myDatabc, aes(ymin=mean-se, ymax=mean + se),width = .25, na.rm = TRUE, color="black")+scale_color_manual(values=c("lightskyblue","black","violetred3","turquoise4"))+scale_shape_manual(values=c(15:18,4))+scale_y_continuous("Estimated contribution to polar bear diet (%)", sec.axis = sec_axis(~ .* 1.00, name = "Body condition"))+theme(plot.title = element_text(hjust = 0.5))+theme_grey()
 p
 ```
 
-
-```{r}
-install.packages("ggmap")
-library(ggmap)
-
-library(ggmap)
-qmap(location = "boston university")
-qmap(location = "boston university", zoom = 14)
-qmap(location = "boston university", zoom = 14, source = "osm")
-
-```
 
