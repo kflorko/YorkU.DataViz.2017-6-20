@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Instructor: [Katie Florko](https://twitter.com/kflorko?lang=en) | York University
 --------------------------------------------------------------------|----------------
 **Co-instructor**: [Alex Filazzola](http://www.filazzola.info)      | June 19, 2017
-**Organizer**: [Chris Lortie](www.christopherlortie.info)           | 4 pm - 6 pm
+**Organizer**: [Chris Lortie](www.christopherlortie.info)           | 4 - 6 pm
 
 ***
 
